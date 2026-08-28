@@ -160,6 +160,14 @@ select{
   background:var(--surface-level-2) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="6"><path d="M0 0l5 6 5-6z" fill="%23b8ced9"/></svg>') no-repeat right 12px center;
   appearance:none;color:var(--text-primary);outline:none;
 }
+.computed-value{
+  width:100%;font-family:var(--font-family);font-size:var(--font-size-eyebrow);font-weight:700;padding:var(--space-s) var(--space-sm);
+  border:1px dashed var(--stroke-on-level-2);border-radius:var(--radius-m);background:var(--surface-level-1);color:var(--text-brand);
+}
+.icon-16{width:16px;height:16px;flex:none;}
+.label-icon{display:inline-flex;align-items:center;gap:var(--space-s);color:var(--text-secondary);}
+.val.icon-val{display:inline-flex;align-items:center;gap:var(--space-2xs);}
+.val.icon-val .icon-16{color:var(--text-brand);}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-sm);}
 .group-label{
   font-size:var(--font-size-footnote);font-weight:700;letter-spacing:.04em;text-transform:uppercase;
@@ -219,6 +227,14 @@ button.ghost:focus-visible{outline:2px solid var(--stroke-brand);outline-offset:
 
 .footnote{font-size:var(--font-size-footnote);color:var(--text-secondary);line-height:var(--line-height-xs);margin-top:var(--space-m);border-top:1px dashed var(--stroke-on-level-1);padding-top:var(--space-m);}
 .footnote b{color:var(--text-primary);}
+
+.recommend{background:var(--tint-warning);border:1px solid var(--stroke-warning);border-radius:var(--radius-m);padding:var(--space-m);margin-bottom:var(--space-l);}
+.recommend h3{font-size:var(--font-size-footnote);text-transform:uppercase;letter-spacing:.04em;color:var(--text-warning);margin:0 0 var(--space-s);}
+.recommend p{font-size:var(--font-size-footnote);color:var(--text-primary);margin:0 0 var(--space-s);line-height:var(--line-height-sm);}
+.recommend ul{margin:0;padding-left:18px;font-size:var(--font-size-footnote);color:var(--text-secondary);line-height:var(--line-height-sm);}
+.recommend li{margin-bottom:var(--space-xs);}
+.recommend li:last-child{margin-bottom:0;}
+.recommend li b{color:var(--text-primary);}
 
 .funnel-table{display:flex;flex-direction:column;gap:var(--space-s);}
 .funnel-head{
@@ -296,7 +312,7 @@ button.ghost:focus-visible{outline:2px solid var(--stroke-brand);outline-offset:
     </div>
     <div class="tab" data-tab="2">
       <div class="num">2</div>
-      <div class="t">I know the effect I want to see</div>
+      <div class="t">I know the impact I expect to see</div>
       <div class="d">Find out how many customers you need to send to.</div>
     </div>
     <div class="tab" data-tab="3">
@@ -399,20 +415,45 @@ button.ghost:focus-visible{outline:2px solid var(--stroke-brand);outline-offset:
   <!-- ============ PANEL 2 ============ -->
   <div class="panel" id="panel2">
     <div class="card">
-      <h2>What difference are you hoping to see?</h2>
-      <p class="sub">Tell us the two rates you're comparing. We'll tell you how many customers you need to trust the result.</p>
+      <h2>What impact are you expecting?</h2>
+      <p class="sub">Give us your status quo rate and how big a change you expect, on Rabot's 0–10 impact scale. We'll translate that into a target rate for your test group and tell you how many customers you need to prove it.</p>
 
       <div class="field">
-        <div class="two-col">
-          <div>
-            <label>Rate for your control group <span class="val" id="p2_lblP1">35%</span></label>
-            <input type="number" id="p2_p1" value="30" min="0.1" max="99.9" step="0.1">
-          </div>
-          <div>
-            <label>Rate you expect for your test group <span class="val" id="p2_lblP2">42%</span></label>
-            <input type="number" id="p2_p2" value="40" min="0.1" max="99.9" step="0.1">
-          </div>
-        </div>
+        <label>Rate for your control group <span class="val" id="p2_lblP1">30%</span></label>
+        <input type="number" id="p2_p1" value="30" min="0.1" max="99.9" step="0.1">
+        <div class="hint">Your status quo — the rate you'd see with no change at all.</div>
+      </div>
+
+      <div class="field">
+        <label>Which way do you expect this metric to move? <span class="val icon-val" id="p2_lblDirection">Up</span></label>
+        <select id="p2_direction">
+          <option value="up" selected>Up — e.g. conversion, opens, clicks, switches (higher is better)</option>
+          <option value="down">Down — e.g. churn, complaints, unsubscribes (lower is better)</option>
+        </select>
+        <div class="hint">The impact scale below is about the size of the change — this is about which direction counts as a win.</div>
+      </div>
+
+      <div class="field">
+        <label><span class="label-icon"><svg class="icon-16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1 2C1 1.44772 1.44772 1 2 1C2.55228 1 3 1.44772 3 2V5.13379C3.16495 5.04022 3.33503 4.9471 3.50977 4.8584C4.37433 4.41953 5.46176 4 6.5 4C7.60821 4 8.16618 4.14401 8.62891 4.3125C8.98275 4.44136 9.07761 4.50233 9.49414 4.5L9.79395 4.48535C11.1087 4.36576 11.9224 3.51592 13 2.55273V2C13 1.44772 13.4477 1 14 1C14.5523 1 15 1.44772 15 2V14C15 14.5523 14.5523 15 14 15H2C1.44772 15 1 14.5523 1 14V2ZM12.6162 11.6846C11.6039 12.0655 10.2117 12.4976 9.00195 12.5C8.23389 12.5015 7.63722 12.3001 7.20703 12.1689C6.82803 12.0534 6.5528 11.9815 6.22949 11.9883L6.08691 11.9961C5.46562 12.0507 4.63617 12.439 3.87109 12.9092C3.82286 12.9388 3.77688 12.9706 3.73047 13H13V11.5312C12.8768 11.5804 12.7493 11.6345 12.6162 11.6846ZM12.6973 8.28027C11.8185 8.68626 10.673 9.15793 9.61035 9.39844L9.16113 9.4873C8.22153 9.6407 7.4529 9.51637 6.86035 9.43945C6.33941 9.37183 5.92666 9.33351 5.45605 9.42188L5.25 9.46875C4.74989 9.59781 4.09509 9.91643 3.5166 10.2432C3.32292 10.3526 3.14701 10.4585 3 10.5488V11.0996C3.78996 10.63 4.87396 10.095 5.91309 10.0039L6.20215 9.98828C6.85716 9.97749 7.3753 10.1295 7.79004 10.2559C8.26691 10.4012 8.57868 10.5008 8.99805 10.5C9.82669 10.4984 10.9342 10.1805 11.9121 9.8125C12.3372 9.65253 12.714 9.49114 13 9.36328V8.13477C12.9019 8.18159 12.8015 8.23211 12.6973 8.28027ZM13 5.20508C12.1562 5.84603 11.0925 6.42433 9.74512 6.49316L9.50586 6.5C8.68764 6.50462 8.28171 6.31525 7.94434 6.19238C7.71587 6.10919 7.39115 6 6.5 6C5.93824 6 5.19214 6.24713 4.41504 6.6416C3.87199 6.91726 3.37403 7.23431 3 7.5V8.24805C3.53429 7.96928 4.16444 7.68236 4.75 7.53125L5.09863 7.4541C5.89334 7.30734 6.55736 7.38325 7.11816 7.45605C7.76189 7.53962 8.23691 7.61097 8.83887 7.5127L9.18555 7.44434C10.019 7.25396 11.0046 6.85975 11.8594 6.46484C12.3116 6.2559 12.7083 6.05575 13 5.90332V5.20508Z" fill="currentColor"/></svg>Impact you're expecting</span> <span class="val" id="p2_lblImpact">6 · Medium</span></label>
+        <select id="p2_impact">
+          <option value="10">10</option>
+          <option value="9">9</option>
+          <option value="8">8</option>
+          <option value="7">7</option>
+          <option value="6" selected>6</option>
+          <option value="5">5</option>
+          <option value="4">4</option>
+          <option value="3">3</option>
+          <option value="2">2</option>
+          <option value="1">1</option>
+          <option value="0">0</option>
+        </select>
+        <div class="hint" id="p2_impactComment">—</div>
+      </div>
+
+      <div class="field">
+        <label>Rate we'd expect for your test group <span class="val" id="p2_lblP2">40.0%</span></label>
+        <div class="computed-value" id="p2_p2Display">40.0%</div>
       </div>
 
       <div class="field">
@@ -461,6 +502,12 @@ button.ghost:focus-visible{outline:2px solid var(--stroke-brand);outline-offset:
         </div>
       </div>
 
+      <div class="recommend" id="p2_recommend" style="display:none;">
+        <h3>These numbers are pretty far apart</h3>
+        <p id="p2_recommendIntro">—</p>
+        <ul id="p2_recommendList"></ul>
+      </div>
+
       <div class="outcome">
         <h3>Expected outcome</h3>
         <div class="bars">
@@ -478,6 +525,15 @@ button.ghost:focus-visible{outline:2px solid var(--stroke-brand);outline-offset:
         <div class="gap-line">
           <span class="gk">Difference you're aiming to prove</span>
           <span class="gv" id="p2_gap">10.0 pp · 100 customers · 33% relative change</span>
+        </div>
+      </div>
+
+      <div class="outcome" style="margin-top:14px;">
+        <h3>Sample size at different rigor levels</h3>
+        <p class="sub" style="margin-bottom:12px;">Same control rate, impact, and split — just different confidence/power targets, so you can see what more rigor costs you.</p>
+        <div class="scale-table">
+          <div class="scale-head"><div>Rigor level</div><div>Per arm</div><div>Total needed</div></div>
+          <div id="p2_rigorRows"></div>
         </div>
       </div>
     </div>
@@ -631,23 +687,49 @@ button.ghost:focus-visible{outline:2px solid var(--stroke-brand);outline-offset:
   }
   function normCdf(x){ return 0.5*(1+erf(x/Math.SQRT2)); }
 
-  function achievedPower(n1,n2,p1,p2,zAlpha){
+  // Inverse standard normal CDF (probit), Acklam's rational approximation —
+  // used to turn a two-tailed significance level (e.g. alpha=0.05) into its
+  // actual critical z-value (e.g. z=1.960), rather than using the raw alpha
+  // number as if it already were a z-score.
+  function normInv(p){
+    if(p <= 0) return -Infinity;
+    if(p >= 1) return Infinity;
+    const a=[-3.969683028665376e+01,2.209460984245205e+02,-2.759285104469687e+02,1.383577518672690e+02,-3.066479806614716e+01,2.506628277459239e+00];
+    const b=[-5.447609879822406e+01,1.615858368580409e+02,-1.556989798598866e+02,6.680131188771972e+01,-1.328068155288572e+01];
+    const c=[-7.784894002430293e-03,-3.223964580411365e-01,-2.400758277161838e+00,-2.549732539343734e+00,4.374664141464968e+00,2.938163982698783e+00];
+    const d=[7.784695709041462e-03,3.224671290700398e-01,2.445134137142996e+00,3.754408661907416e+00];
+    const pLow=0.02425, pHigh=1-pLow;
+    let q, r;
+    if(p < pLow){
+      q = Math.sqrt(-2*Math.log(p));
+      return (((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5]) / ((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);
+    } else if(p <= pHigh){
+      q = p - 0.5; r = q*q;
+      return (((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q / (((((b[0]*r+b[1])*r+b[2])*r+b[3])*r+b[4])*r+1);
+    } else {
+      q = Math.sqrt(-2*Math.log(1-p));
+      return -(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5]) / ((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);
+    }
+  }
+  function alphaToZ(alpha){ return normInv(1 - alpha/2); } // two-tailed critical z
+
+  function achievedPower(n1,n2,p1,p2,alpha){
     const SE = Math.sqrt(p1*(1-p1)/n1 + p2*(1-p2)/n2);
     const D = Math.abs(p2-p1);
     if(SE===0) return 1;
-    return normCdf(D/SE - zAlpha);
+    return normCdf(D/SE - alphaToZ(alpha));
   }
-  function requiredN(r,p1,p2,zAlpha,targetPower){
+  function requiredN(r,p1,p2,alpha,targetPower){
     let lo=4, hi=600000;
     function powAt(Ntot){
       const n1=Math.max(1,Math.round(Ntot*r)); const n2=Math.max(1,Ntot-n1);
-      return achievedPower(n1,n2,p1,p2,zAlpha);
+      return achievedPower(n1,n2,p1,p2,alpha);
     }
     if(powAt(hi) < targetPower) return null;
     while(lo<hi){ const mid=Math.floor((lo+hi)/2); if(powAt(mid)>=targetPower){hi=mid;}else{lo=mid+1;} }
     return lo;
   }
-  function mdeAt(n1,n2,p1,zSum){ return zSum*Math.sqrt(p1*(1-p1)*(1/n1+1/n2)); }
+  function mdeAt(n1,n2,p1,alpha,zPower){ return (alphaToZ(alpha)+zPower)*Math.sqrt(p1*(1-p1)*(1/n1+1/n2)); }
 
   function computeSignificance(nA,xA,nB,xB,alpha){
     const pA = xA/nA, pB = xB/nB;
@@ -689,7 +771,7 @@ button.ghost:focus-visible{outline:2px solid var(--stroke-brand);outline-offset:
     const N = Math.max(10, parseInt($('p1_N').value||'0',10));
     const r = parseInt($('p1_split').value,10)/100;
     const p1 = Math.min(99.9,Math.max(0.1,parseFloat($('p1_p1').value||'0')))/100;
-    const zAlpha = parseFloat($('p1_alpha').value);
+    const alpha = parseFloat($('p1_alpha').value);
     const zPower = parseFloat($('p1_power').value);
     const n1 = Math.max(1,Math.round(N*r)), n2 = Math.max(1,N-n1);
 
@@ -698,7 +780,7 @@ button.ghost:focus-visible{outline:2px solid var(--stroke-brand);outline-offset:
     $('p1_lblSplit').textContent = Math.round(r*100)+'% / '+Math.round((1-r)*100)+'%';
     $('p1_lblP1').textContent = (p1*100).toFixed(1).replace(/\.0$/,'')+'%';
 
-    const mde = mdeAt(n1,n2,p1,zAlpha+zPower); // proportion
+    const mde = mdeAt(n1,n2,p1,alpha,zPower); // proportion
     const mdePP = mde*100;
     const relPct = (mde/p1)*100;
     const extra = Math.round(n1*mde);
@@ -724,7 +806,7 @@ button.ghost:focus-visible{outline:2px solid var(--stroke-brand);outline-offset:
       const scaledN = Math.max(20, Math.round(N*m/10)*10); // round to nearest 10 for readability
       const sn1 = Math.max(1, Math.round(scaledN*r));
       const sn2 = Math.max(1, scaledN - sn1);
-      const scaledMde = mdeAt(sn1, sn2, p1, zAlpha+zPower)*100;
+      const scaledMde = mdeAt(sn1, sn2, p1, alpha, zPower)*100;
       const isCurrent = Math.abs(scaledN - N) <= Math.max(5, N*0.02);
       return `<div class="scale-row${isCurrent ? ' current' : ''}">
         <div class="sr-n">${fmt(scaledN)}${isCurrent ? '<span class="sr-tag">Yours</span>' : ''}</div>
@@ -740,30 +822,83 @@ button.ghost:focus-visible{outline:2px solid var(--stroke-brand);outline-offset:
   $('p1_reset50').addEventListener('click', ()=>{ $('p1_split').value=50; renderP1(); });
 
   // ---------- Panel 2 ----------
+  // Rabot icon set (rabot-icons): price_up_16 / price_down_16, inlined so
+  // the direction indicator can swap between them via currentColor.
+  const ICON_PRICE_UP = '<svg class="icon-16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M7.5 6C8.05228 6 8.5 6.44772 8.5 7C8.5 7.55228 8.05228 8 7.5 8H7C6.26007 8 5.61546 8.40267 5.26953 9H7C7.55228 9 8 9.44772 8 10C8 10.5523 7.55228 11 7 11H5.26953C5.61546 11.5973 6.26007 12 7 12H7.5C8.05228 12 8.5 12.4477 8.5 13C8.5 13.5523 8.05228 14 7.5 14H7C5.13616 14 3.57002 12.7252 3.12598 11H3C2.44772 11 2 10.5523 2 10C2 9.44772 2.44772 9 3 9H3.12598C3.57002 7.27477 5.13616 6 7 6H7.5ZM13.3535 2C13.7497 2 14.0713 2.32158 14.0713 2.71777V5.76074C14.0713 6.05089 13.896 6.31279 13.6279 6.42383C13.3601 6.53463 13.0518 6.47337 12.8467 6.26855L12.3389 5.76074L10.4189 7.68066C10.4699 7.46181 10.5 7.23444 10.5 7C10.5 6.05463 10.0622 5.21199 9.37891 4.66211L10.3105 3.73145L9.80273 3.22461C9.59764 3.01944 9.53644 2.7104 9.64746 2.44238C9.75859 2.17455 10.0205 2 10.3105 2H13.3535Z" fill="currentColor"/></svg>';
+  const ICON_PRICE_DOWN = '<svg class="icon-16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M12.3389 10.2393L12.8467 9.73145C13.0518 9.52671 13.3601 9.46542 13.6279 9.57617C13.896 9.68721 14.0713 9.94911 14.0713 10.2393V13.2822C14.0713 13.6784 13.7497 14 13.3535 14H10.3096C10.0199 13.9997 9.75852 13.8252 9.64746 13.5576C9.5365 13.2896 9.5977 12.9805 9.80273 12.7754L10.3096 12.2686L9.37891 11.3369C10.0619 10.787 10.5 9.94508 10.5 9C10.5 8.7656 10.4699 8.53821 10.4189 8.31934L12.3389 10.2393ZM7.5 2C8.05228 2 8.5 2.44772 8.5 3C8.5 3.55228 8.05228 4 7.5 4H7C6.26007 4 5.61546 4.40267 5.26953 5H7C7.55228 5 8 5.44772 8 6C8 6.55228 7.55228 7 7 7H5.26953C5.61546 7.59733 6.26007 8 7 8H7.5C8.05228 8 8.5 8.44772 8.5 9C8.5 9.55228 8.05228 10 7.5 10H7C5.13616 10 3.57002 8.72523 3.12598 7H3C2.44772 7 2 6.55228 2 6C2 5.44772 2.44772 5 3 5H3.12598C3.57002 3.27477 5.13616 2 7 2H7.5Z" fill="currentColor"/></svg>';
+
+  // Rabot Impact Scale: maps a 0–10 impact score to the relative-change
+  // band it stands for (direction — up or down — is picked separately,
+  // since e.g. churn is a "win" when it goes down). `mid` is the midpoint
+  // of that band (representative value used to derive the test group
+  // rate); score 10 is open-ended (">200%"), so we use 250% as a
+  // representative estimate.
+  const IMPACT_SCALE = [
+    { score:0,  tshirt:'None (most common)', rangeText:'0% or less',    mid:0 },
+    { score:1,  tshirt:'X-Small',             rangeText:'0.1%–0.9%',     mid:0.5 },
+    { score:2,  tshirt:'X-Small',             rangeText:'1%–3.9%',       mid:2.45 },
+    { score:3,  tshirt:'Small',               rangeText:'4%–7.9%',       mid:5.95 },
+    { score:4,  tshirt:'Small',               rangeText:'8%–14.9%',      mid:11.45 },
+    { score:5,  tshirt:'Medium',              rangeText:'15%–24.9%',     mid:19.95 },
+    { score:6,  tshirt:'Medium',              rangeText:'25%–39.9%',     mid:32.45 },
+    { score:7,  tshirt:'Large',               rangeText:'40%–79.9%',     mid:59.95 },
+    { score:8,  tshirt:'Large',               rangeText:'80%–119.9%',    mid:99.95 },
+    { score:9,  tshirt:'X-Large',             rangeText:'120%–199.9%',   mid:159.95 },
+    { score:10, tshirt:'X-Large (most rare)', rangeText:'more than 200%', mid:250 },
+  ];
+
+  // Reference rigor levels shown in the comparison table, independent of
+  // whatever the user currently has selected in the "how sure / how
+  // reliably" dropdowns above.
+  const RIGOR_PRESETS = [
+    { key:'minimal', label:'Minimal', alphaVal:0.10, zPowerVal:0.8416 },
+    { key:'optimal', label:'Optimal', alphaVal:0.05, zPowerVal:1.2816 },
+  ];
+
   function renderP2(){
     const p1 = Math.min(99.9,Math.max(0.1,parseFloat($('p2_p1').value||'0')))/100;
-    const p2 = Math.min(99.9,Math.max(0.1,parseFloat($('p2_p2').value||'0')))/100;
+    const direction = $('p2_direction').value; // 'up' or 'down'
+    const impactScore = parseInt($('p2_impact').value,10);
+    const impact = IMPACT_SCALE.find(i=>i.score===impactScore) || IMPACT_SCALE[6];
+    const relChangePct = impact.mid;
+    // A relative decrease can never exceed 100% (the rate would go negative),
+    // so floor the multiplier at 0 rather than letting it go negative —
+    // that's the case for a "down" direction paired with Impact 8+.
+    const multiplier = direction==='down' ? Math.max(0, 1-relChangePct/100) : (1+relChangePct/100);
+    const p2Raw = p1*multiplier;
+    const p2 = Math.min(0.999, Math.max(0.001, p2Raw));
+    const wasCapped = Math.abs(p2Raw - p2) > 0.0005;
+    const directionWord = direction==='down' ? 'decrease' : 'increase';
+
     const r = parseInt($('p2_split').value,10)/100;
-    const zAlpha = parseFloat($('p2_alpha').value);
+    const alpha = parseFloat($('p2_alpha').value);
     const zPower = parseFloat($('p2_power').value);
     const targetPower = normCdf(zPower);
-    const have = $('p2_have').value ? parseInt($('p2_have').value,10) : null;
+    const haveRaw = $('p2_have').value ? parseInt($('p2_have').value,10) : null;
+    const have = (haveRaw !== null && !isNaN(haveRaw)) ? Math.max(0, haveRaw) : haveRaw;
 
     $('p2_split').style.setProperty('--pct', r*100+'%');
     $('p2_lblP1').textContent = (p1*100).toFixed(1).replace(/\.0$/,'')+'%';
+    $('p2_lblDirection').innerHTML = (direction==='down' ? ICON_PRICE_DOWN+'Down' : ICON_PRICE_UP+'Up');
+    $('p2_lblImpact').textContent = impact.score+' · '+impact.tshirt;
     $('p2_lblP2').textContent = (p2*100).toFixed(1).replace(/\.0$/,'')+'%';
+    $('p2_p2Display').textContent = (p2*100).toFixed(1)+'%';
     $('p2_lblSplit').textContent = Math.round(r*100)+'% / '+Math.round((1-r)*100)+'%';
+
+    $('p2_impactComment').textContent = impact.score===0
+      ? `Impact 0 (${impact.tshirt}) means no meaningful relative change — your test rate is assumed equal to your control rate (${(p1*100).toFixed(1)}%). With no real gap to find, no sample size will reliably catch one.`
+      : `Impact ${impact.score} (${impact.tshirt}) covers a ${impact.rangeText} relative ${directionWord} on your control rate. We use ~${relChangePct.toFixed(1).replace(/\.0$/,'')}% — the middle of that band — as a representative estimate: ${(p1*100).toFixed(1)}% × ${multiplier.toFixed(2)} ≈ ${(p2Raw*100).toFixed(1)}%.${wasCapped ? ` Capped at ${(p2*100).toFixed(1)}%, since a rate can't go ${direction==='down' ? 'below 0%' : 'above 100%'}.` : ''} That's the target rate the sample size below is built to detect.`;
 
     const Dhyp = Math.abs(p2-p1);
     const DhypPP = Dhyp*100;
     const relPct = p1===0?0:(Dhyp/p1)*100;
 
-    const reqN = requiredN(r,p1,p2,zAlpha,targetPower);
+    const reqN = requiredN(r,p1,p2,alpha,targetPower);
     let n1,n2;
     if(reqN){ n1=Math.max(1,Math.round(reqN*r)); n2=Math.max(1,reqN-n1); } else { n1=0;n2=0; }
 
     if(reqN){
-      $('p2_sentence').innerHTML = `To reliably tell these two rates apart, you need about <b>${fmt(reqN)} customers total</b> — <b>${fmt(n1)}</b> in the test group and <b>${fmt(n2)}</b> in control, split ${Math.round(r*100)}% / ${Math.round((1-r)*100)}%.`;
+      $('p2_sentence').innerHTML = `Starting from a status quo of <b>${(p1*100).toFixed(1)}%</b> and an Impact ${impact.score} ${directionWord} (target rate <b>${(p2*100).toFixed(1)}%</b>), you need about <b>${fmt(reqN)} customers total</b> — <b>${fmt(n1)}</b> per arm in the test group and <b>${fmt(n2)}</b> per arm in control, split ${Math.round(r*100)}% / ${Math.round((1-r)*100)}%.`;
     } else {
       $('p2_sentence').innerHTML = `This gap is so small that no realistic number of customers would let you prove it reliably. Consider aiming for a bigger expected effect, or treating results as directional only.`;
     }
@@ -778,6 +913,7 @@ button.ghost:focus-visible{outline:2px solid var(--stroke-brand);outline-offset:
     const diffCustomers = Math.round(n1*p2) - Math.round(n1*p1);
     $('p2_gap').textContent = DhypPP.toFixed(1)+' pp · '+fmt(Math.abs(diffCustomers))+' customers · '+relPct.toFixed(0)+'% relative change';
 
+    // ---- Verdict: do you have enough? ----
     const verdictEl = $('p2_verdict');
     if(have !== null && !isNaN(have) && reqN){
       verdictEl.style.display = 'flex';
@@ -793,8 +929,46 @@ button.ghost:focus-visible{outline:2px solid var(--stroke-brand);outline-offset:
     } else {
       verdictEl.style.display='none';
     }
+
+    // ---- Recommendation: is the required N and what you have too far apart? ----
+    const recommendEl = $('p2_recommend');
+    const shortfallPct = (have !== null && !isNaN(have) && reqN) ? ((reqN-have)/reqN*100) : null;
+    const tooFar = (reqN === null) || (shortfallPct !== null && shortfallPct > 50);
+    if(tooFar){
+      recommendEl.style.display = 'block';
+      $('p2_recommendIntro').textContent = (reqN === null)
+        ? `At Impact ${impact.score} on a ${(p1*100).toFixed(1)}% baseline, this effect can't be proven with any realistic number of customers.`
+        : `You have ${fmt(have)} customers but need about ${fmt(reqN)} — that's ${shortfallPct.toFixed(0)}% short. A few ways to close that gap:`;
+      $('p2_recommendList').innerHTML =
+        '<li><b>Try a higher-baseline metric</b> — e.g. open or click rate instead of a rarer outcome like churn or switch. A higher baseline needs far fewer customers to detect the same relative change.</li>' +
+        '<li><b>Loosen your rigor</b> — accept 90% confidence instead of 95%, or 80% power instead of 90%, if the decision doesn\'t need to be airtight.</li>' +
+        '<li><b>Aim for a bigger expected impact</b> — a larger effect is easier to detect with fewer customers; check whether this Impact score is realistic for what you\'re testing.</li>';
+    } else {
+      recommendEl.style.display = 'none';
+    }
+
+    // ---- Sample size at different rigor levels ----
+    // If "your setting" numerically matches a preset (e.g. you already have
+    // 90%/80% selected, same as Minimal), tag that preset row as "Yours"
+    // instead of also showing a separate, identical "Your setting" row.
+    const matchesPreset = RIGOR_PRESETS.some(p => p.alphaVal===alpha && p.zPowerVal===zPower);
+    const rigorLevels = matchesPreset
+      ? RIGOR_PRESETS.map(p => ({ ...p, isYours: p.alphaVal===alpha && p.zPowerVal===zPower }))
+      : [ { key:'yours', label:'Your setting', alphaVal:alpha, zPowerVal:zPower, isYours:true }, ...RIGOR_PRESETS.map(p=>({...p, isYours:false})) ];
+    $('p2_rigorRows').innerHTML = rigorLevels.map(lv=>{
+      const conf = Math.round((1-lv.alphaVal)*100);
+      const pw = Math.round(normCdf(lv.zPowerVal)*100);
+      const n = requiredN(r,p1,p2,lv.alphaVal,normCdf(lv.zPowerVal));
+      const nn1 = n ? Math.max(1,Math.round(n*r)) : null;
+      const nn2 = n ? Math.max(1,n-nn1) : null;
+      return `<div class="scale-row${lv.isYours?' current':''}">
+        <div class="sr-n">${lv.label} (${conf}% · ${pw}%)${lv.isYours?'<span class="sr-tag">Yours</span>':''}</div>
+        <div class="sr-arm">${n ? fmt(nn1)+' / '+fmt(nn2) : '—'}</div>
+        <div class="sr-mde">${n ? fmt(n)+' total' : 'not achievable'}</div>
+      </div>`;
+    }).join('');
   }
-  ['p2_p1','p2_p2','p2_split','p2_alpha','p2_power','p2_have'].forEach(id=>{
+  ['p2_p1','p2_direction','p2_impact','p2_split','p2_alpha','p2_power','p2_have'].forEach(id=>{
     $(id).addEventListener('input', renderP2); $(id).addEventListener('change', renderP2);
   });
 
@@ -821,8 +995,11 @@ button.ghost:focus-visible{outline:2px solid var(--stroke-brand);outline-offset:
     $('p3_verdictLabel').textContent = r.label;
     $('p3_verdictDesc').textContent = r.desc;
 
-    const direction = r.pB>r.pA ? 'higher' : (r.pB<r.pA ? 'lower' : 'the same as');
-    $('p3_sentence').innerHTML = `Group B's rate (<b>${pct(xB,nB)}%</b>) was <b>${Math.abs(r.gapPP).toFixed(1)} percentage points ${direction === 'the same as' ? '' : direction}</b> than Group A's rate (<b>${pct(xA,nA)}%</b>) — about <b>${fmt(Math.abs(r.diffCustomers))} ${r.diffCustomers>=0?'more':'fewer'} customers</b> than you'd expect if both groups behaved the same way.`;
+    const direction = r.pB>r.pA ? 'higher' : (r.pB<r.pA ? 'lower' : null);
+    const gapPhrase = direction===null
+      ? `was <b>the same as</b> Group A's rate (<b>${pct(xA,nA)}%</b>)`
+      : `was <b>${Math.abs(r.gapPP).toFixed(1)} percentage points ${direction}</b> than Group A's rate (<b>${pct(xA,nA)}%</b>)`;
+    $('p3_sentence').innerHTML = `Group B's rate (<b>${pct(xB,nB)}%</b>) ${gapPhrase} — about <b>${fmt(Math.abs(r.diffCustomers))} ${r.diffCustomers>=0?'more':'fewer'} customers</b> than you'd expect if both groups behaved the same way.`;
 
     $('p3_footnote').textContent = 'This checks whether a gap this size could just be random noise, given how many customers were in each group. It does not tell you why the gap happened.';
   }
@@ -831,20 +1008,38 @@ button.ghost:focus-visible{outline:2px solid var(--stroke-brand);outline-offset:
   });
 
   // ---------- Panel 4: full LOOP funnel ----------
+  // Steps reference the *previous* stage's key as their denominator (rather
+  // than re-reading that raw input) so a step can never show more people
+  // than made it through the stage before it — e.g. "delivered" can't
+  // exceed "sent", and the "open rate" row's denominator always matches
+  // the (possibly clamped) delivered count shown in the row above it.
   const FUNNEL_STEPS = [
-    { label:'Delivery rate', numA:'p4_deliveredA', denomA:'p4_sentA', numB:'p4_deliveredB', denomB:'p4_sentB', note:'of sent' },
-    { label:'Open rate', numA:'p4_openedA', denomA:'p4_deliveredA', numB:'p4_openedB', denomB:'p4_deliveredB', note:'of delivered' },
-    { label:'Click rate', numA:'p4_clickedA', denomA:'p4_openedA', numB:'p4_clickedB', denomB:'p4_openedB', note:'of opened' },
-    { label:'Switch rate', numA:'p4_switchedA', denomA:'p4_sentA', numB:'p4_switchedB', denomB:'p4_sentB', note:'of sent' },
+    { label:'Delivery rate', num:'delivered', denom:'sent', note:'of sent' },
+    { label:'Open rate', num:'opened', denom:'delivered', note:'of delivered' },
+    { label:'Click rate', num:'clicked', denom:'opened', note:'of opened' },
+    { label:'Switch rate', num:'switched', denom:'sent', note:'of sent' },
   ];
+
+  // Reads one group's raw funnel inputs and cascades the clamp down the
+  // funnel: each stage is capped at the stage before it, so "delivered"
+  // can never exceed "sent", "opened" can never exceed "delivered", etc.
+  function readFunnel(suffix){
+    const raw = key => Math.max(0, parseInt($('p4_'+key+suffix).value||'0',10));
+    const sent = raw('sent');
+    const delivered = Math.min(raw('delivered'), sent);
+    const opened = Math.min(raw('opened'), delivered);
+    const clicked = Math.min(raw('clicked'), opened);
+    const switched = Math.min(raw('switched'), sent);
+    return { sent, delivered, opened, clicked, switched };
+  }
 
   function renderP4(){
     const alpha = parseFloat($('p4_alpha').value);
+    const fA = readFunnel('A');
+    const fB = readFunnel('B');
     const rowsHTML = FUNNEL_STEPS.map(step=>{
-      const denomA = Math.max(0, parseInt($(step.denomA).value||'0',10));
-      const denomB = Math.max(0, parseInt($(step.denomB).value||'0',10));
-      const numA = Math.min(denomA, Math.max(0, parseInt($(step.numA).value||'0',10)));
-      const numB = Math.min(denomB, Math.max(0, parseInt($(step.numB).value||'0',10)));
+      const denomA = fA[step.denom], denomB = fB[step.denom];
+      const numA = fA[step.num], numB = fB[step.num];
 
       if(denomA < 1 || denomB < 1){
         return `<div class="funnel-row">
