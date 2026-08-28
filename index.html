@@ -164,10 +164,6 @@ select{
   width:100%;font-family:var(--font-family);font-size:var(--font-size-eyebrow);font-weight:700;padding:var(--space-s) var(--space-sm);
   border:1px dashed var(--stroke-on-level-2);border-radius:var(--radius-m);background:var(--surface-level-1);color:var(--text-brand);
 }
-.icon-16{width:16px;height:16px;flex:none;}
-.label-icon{display:inline-flex;align-items:center;gap:var(--space-s);color:var(--text-secondary);}
-.val.icon-val{display:inline-flex;align-items:center;gap:var(--space-2xs);}
-.val.icon-val .icon-16{color:var(--text-brand);}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-sm);}
 .group-label{
   font-size:var(--font-size-footnote);font-weight:700;letter-spacing:.04em;text-transform:uppercase;
@@ -425,7 +421,7 @@ button.ghost:focus-visible{outline:2px solid var(--stroke-brand);outline-offset:
       </div>
 
       <div class="field">
-        <label>Which way do you expect this metric to move? <span class="val icon-val" id="p2_lblDirection">Up</span></label>
+        <label>Which way do you expect this metric to move? <span class="val" id="p2_lblDirection">Up</span></label>
         <select id="p2_direction">
           <option value="up" selected>Up — e.g. conversion, opens, clicks, switches (higher is better)</option>
           <option value="down">Down — e.g. churn, complaints, unsubscribes (lower is better)</option>
@@ -434,7 +430,7 @@ button.ghost:focus-visible{outline:2px solid var(--stroke-brand);outline-offset:
       </div>
 
       <div class="field">
-        <label><span class="label-icon"><svg class="icon-16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1 2C1 1.44772 1.44772 1 2 1C2.55228 1 3 1.44772 3 2V5.13379C3.16495 5.04022 3.33503 4.9471 3.50977 4.8584C4.37433 4.41953 5.46176 4 6.5 4C7.60821 4 8.16618 4.14401 8.62891 4.3125C8.98275 4.44136 9.07761 4.50233 9.49414 4.5L9.79395 4.48535C11.1087 4.36576 11.9224 3.51592 13 2.55273V2C13 1.44772 13.4477 1 14 1C14.5523 1 15 1.44772 15 2V14C15 14.5523 14.5523 15 14 15H2C1.44772 15 1 14.5523 1 14V2ZM12.6162 11.6846C11.6039 12.0655 10.2117 12.4976 9.00195 12.5C8.23389 12.5015 7.63722 12.3001 7.20703 12.1689C6.82803 12.0534 6.5528 11.9815 6.22949 11.9883L6.08691 11.9961C5.46562 12.0507 4.63617 12.439 3.87109 12.9092C3.82286 12.9388 3.77688 12.9706 3.73047 13H13V11.5312C12.8768 11.5804 12.7493 11.6345 12.6162 11.6846ZM12.6973 8.28027C11.8185 8.68626 10.673 9.15793 9.61035 9.39844L9.16113 9.4873C8.22153 9.6407 7.4529 9.51637 6.86035 9.43945C6.33941 9.37183 5.92666 9.33351 5.45605 9.42188L5.25 9.46875C4.74989 9.59781 4.09509 9.91643 3.5166 10.2432C3.32292 10.3526 3.14701 10.4585 3 10.5488V11.0996C3.78996 10.63 4.87396 10.095 5.91309 10.0039L6.20215 9.98828C6.85716 9.97749 7.3753 10.1295 7.79004 10.2559C8.26691 10.4012 8.57868 10.5008 8.99805 10.5C9.82669 10.4984 10.9342 10.1805 11.9121 9.8125C12.3372 9.65253 12.714 9.49114 13 9.36328V8.13477C12.9019 8.18159 12.8015 8.23211 12.6973 8.28027ZM13 5.20508C12.1562 5.84603 11.0925 6.42433 9.74512 6.49316L9.50586 6.5C8.68764 6.50462 8.28171 6.31525 7.94434 6.19238C7.71587 6.10919 7.39115 6 6.5 6C5.93824 6 5.19214 6.24713 4.41504 6.6416C3.87199 6.91726 3.37403 7.23431 3 7.5V8.24805C3.53429 7.96928 4.16444 7.68236 4.75 7.53125L5.09863 7.4541C5.89334 7.30734 6.55736 7.38325 7.11816 7.45605C7.76189 7.53962 8.23691 7.61097 8.83887 7.5127L9.18555 7.44434C10.019 7.25396 11.0046 6.85975 11.8594 6.46484C12.3116 6.2559 12.7083 6.05575 13 5.90332V5.20508Z" fill="currentColor"/></svg>Impact you're expecting</span> <span class="val" id="p2_lblImpact">6 · Medium</span></label>
+        <label>Impact you're expecting <span class="val" id="p2_lblImpact">6 · Medium</span></label>
         <select id="p2_impact">
           <option value="10">10</option>
           <option value="9">9</option>
@@ -822,11 +818,6 @@ button.ghost:focus-visible{outline:2px solid var(--stroke-brand);outline-offset:
   $('p1_reset50').addEventListener('click', ()=>{ $('p1_split').value=50; renderP1(); });
 
   // ---------- Panel 2 ----------
-  // Rabot icon set (rabot-icons): price_up_16 / price_down_16, inlined so
-  // the direction indicator can swap between them via currentColor.
-  const ICON_PRICE_UP = '<svg class="icon-16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M7.5 6C8.05228 6 8.5 6.44772 8.5 7C8.5 7.55228 8.05228 8 7.5 8H7C6.26007 8 5.61546 8.40267 5.26953 9H7C7.55228 9 8 9.44772 8 10C8 10.5523 7.55228 11 7 11H5.26953C5.61546 11.5973 6.26007 12 7 12H7.5C8.05228 12 8.5 12.4477 8.5 13C8.5 13.5523 8.05228 14 7.5 14H7C5.13616 14 3.57002 12.7252 3.12598 11H3C2.44772 11 2 10.5523 2 10C2 9.44772 2.44772 9 3 9H3.12598C3.57002 7.27477 5.13616 6 7 6H7.5ZM13.3535 2C13.7497 2 14.0713 2.32158 14.0713 2.71777V5.76074C14.0713 6.05089 13.896 6.31279 13.6279 6.42383C13.3601 6.53463 13.0518 6.47337 12.8467 6.26855L12.3389 5.76074L10.4189 7.68066C10.4699 7.46181 10.5 7.23444 10.5 7C10.5 6.05463 10.0622 5.21199 9.37891 4.66211L10.3105 3.73145L9.80273 3.22461C9.59764 3.01944 9.53644 2.7104 9.64746 2.44238C9.75859 2.17455 10.0205 2 10.3105 2H13.3535Z" fill="currentColor"/></svg>';
-  const ICON_PRICE_DOWN = '<svg class="icon-16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M12.3389 10.2393L12.8467 9.73145C13.0518 9.52671 13.3601 9.46542 13.6279 9.57617C13.896 9.68721 14.0713 9.94911 14.0713 10.2393V13.2822C14.0713 13.6784 13.7497 14 13.3535 14H10.3096C10.0199 13.9997 9.75852 13.8252 9.64746 13.5576C9.5365 13.2896 9.5977 12.9805 9.80273 12.7754L10.3096 12.2686L9.37891 11.3369C10.0619 10.787 10.5 9.94508 10.5 9C10.5 8.7656 10.4699 8.53821 10.4189 8.31934L12.3389 10.2393ZM7.5 2C8.05228 2 8.5 2.44772 8.5 3C8.5 3.55228 8.05228 4 7.5 4H7C6.26007 4 5.61546 4.40267 5.26953 5H7C7.55228 5 8 5.44772 8 6C8 6.55228 7.55228 7 7 7H5.26953C5.61546 7.59733 6.26007 8 7 8H7.5C8.05228 8 8.5 8.44772 8.5 9C8.5 9.55228 8.05228 10 7.5 10H7C5.13616 10 3.57002 8.72523 3.12598 7H3C2.44772 7 2 6.55228 2 6C2 5.44772 2.44772 5 3 5H3.12598C3.57002 3.27477 5.13616 2 7 2H7.5Z" fill="currentColor"/></svg>';
-
   // Rabot Impact Scale: maps a 0–10 impact score to the relative-change
   // band it stands for (direction — up or down — is picked separately,
   // since e.g. churn is a "win" when it goes down). `mid` is the midpoint
@@ -879,7 +870,7 @@ button.ghost:focus-visible{outline:2px solid var(--stroke-brand);outline-offset:
 
     $('p2_split').style.setProperty('--pct', r*100+'%');
     $('p2_lblP1').textContent = (p1*100).toFixed(1).replace(/\.0$/,'')+'%';
-    $('p2_lblDirection').innerHTML = (direction==='down' ? ICON_PRICE_DOWN+'Down' : ICON_PRICE_UP+'Up');
+    $('p2_lblDirection').textContent = (direction==='down' ? 'Down' : 'Up');
     $('p2_lblImpact').textContent = impact.score+' · '+impact.tshirt;
     $('p2_lblP2').textContent = (p2*100).toFixed(1).replace(/\.0$/,'')+'%';
     $('p2_p2Display').textContent = (p2*100).toFixed(1)+'%';
